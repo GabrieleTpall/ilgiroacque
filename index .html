@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fontanelle Valdichiana</title>
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Fontanelle Valdichiana">
+  <meta name="theme-color" content="#007BFF">
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f8f9fa;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: #007BFF;
+      color: white;
+    }
+    .hero {
+      background-image: url('./valdichiana.png');
+      background-size: cover;
+      background-position: center;
+      height: 200px;
+    }
+    .container {
+      text-align: center;
+      padding: 1.5rem;
+    }
+    .button {
+      display: inline-block;
+      padding: 1rem;
+      font-size: 1rem;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      margin-top: 1rem;
+      width: 90%;
+      max-width: 400px;
+    }
+    .comuni-page {
+      display: none;
+      padding: 1.5rem;
+      background-image: url('./impianto_idrico.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .comune {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 1rem;
+      margin: 0.5rem auto;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      max-width: 400px;
+      cursor: pointer;
+    }
+    .fontanelle-section {
+      display: none;
+      padding: 1.5rem;
+      background-image: url('./impianto_idrico.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .fontanella {
+      background: #fff;
+      padding: 1rem;
+      margin: 0.5rem auto;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+      max-width: 400px;
+    }
+    .titolo-comune {
+      background-color: #007BFF;
+      padding: 1rem;
+      text-align: center;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Fontanelle della Val di Chiana</h1>
+  </header>
+  <div class="hero"></div>
+
+  <div class="container">
+    <p>Benvenuto nel censimento delle fontanelle pubbliche della Val di Chiana. Premi il pulsante qui sotto per esplorare i comuni.</p>
+    <button class="button" onclick="showComuni()">Fontanelle Valdichiana</button>
+  </div>
+
+  <div class="comuni-page" id="comuniPage">
+    <h2 style="text-align:center; background-color: rgba(0,123,255,0.8); color: #000; padding: 1rem; border-radius: 10px;">Comuni censiti</h2>
+    <div class="comune" onclick="showFontanelle('Abbadia')">Abbadia San Salvatore</div>
+    <div class="comune" onclick="showFontanelle('Castiglione')">Castiglione d'Orcia</div>
+    <div class="comune" onclick="showFontanelle('Cetona')">Cetona</div>
+    <div class="comune" onclick="showFontanelle('ChiancianoTerme')">Chianciano Terme</div>
+    <div class="comune" onclick="showFontanelle('Chiusi')">Chiusi</div>
+    <div class="comune" onclick="showFontanelle('Montepulciano')">Montepulciano</div>
+    <div class="comune" onclick="showFontanelle('Piancastagnaio')">Piancastagnaio</div>
+    <div class="comune" onclick="showFontanelle('Pienza')">Pienza</div>
+    <div class="comune" onclick="showFontanelle('Radicofani')">Radicofani</div>
+    <div class="comune" onclick="showFontanelle('SanCascianodeiBagni')">San Casciano dei Bagni</div>
+    <div class="comune" onclick="showFontanelle('SanQuirico')">San Quirico d'Orcia</div>
+    <div class="comune" onclick="showFontanelle('Sarteano')">Sarteano</div>
+    <div class="comune" onclick="showFontanelle('Sinalunga')">Sinalunga</div>
+    <div class="comune" onclick="showFontanelle('Torrita')">Torrita</div>
+    <div class="comune" onclick="showFontanelle('Trequanda')">Trequanda</div>
+  </div>
+
+  <div class="fontanelle-section" id="fontanelleList"></div>
+
+  <script>
+    function showComuni() {
+      document.querySelector('.container').style.display = 'none';
+      document.getElementById('comuniPage').style.display = 'block';
+      document.getElementById('fontanelleList').style.display = 'none';
+    }
+
+    function showFontanelle(comune) {
+      const fontanelleDB = {
+        Abbadia: [
+          { nome: "F.P. castagnatucci", link: "https://maps.app.goo.gl/9rE1D25e9Fb9oc46A" },
+          { nome: "F.P. piscinello", link: "https://maps.app.goo.gl/fGYMXGLCRypUftRaA" },
+          { nome: "F.P. Alvineta", link: "https://maps.app.goo.gl/UGcTxeFPwpnBbGtZ8" },
+          { nome: "F.P. piazza della republica", link: "https://maps.app.goo.gl/er51iAjqbSkBuyHg6" },
+          { nome: "F.P. F.lli Cervi", link: "https://maps.app.goo.gl/VU4yjq9x14z3GPTy9" }
+        ],
+        Castiglione: [
+          { nome: "F.P. Bagni San Filippo", link: "https://maps.app.goo.gl/LZsgwhfcXkpGnVvTA" },
+          { nome: "F.P. Vivo d’Orcia", link: "https://maps.app.goo.gl/w9cWDKhsxYuCfvRc6" },
+          { nome: "F.P. Gallina", link: "https://maps.app.goo.gl/HM8ugkMouAHVb89c8" },
+          { nome: "F.P. Belvedere", link: "https://maps.app.goo.gl/jHGhw1x9fzZuC1ag8" },
+          { nome: "F.P. Campiglia d’Orcia", link: "https://maps.app.goo.gl/nNVYUC5umnJSvUHJ9" },
+          { nome: "F.P. Castiglione d’Orcia", link: "https://maps.app.goo.gl/X3kMERDoXwg5Aehx7" },
+          { nome: "F.P. Pietrineri", link: "https://maps.app.goo.gl/hAQbjyMZZriKa8829" },
+          { nome: "F.P. Rocca d’Orcia", link: "https://maps.app.goo.gl/KsoanrMgeAPjtwZN8" },
+          { nome: "Stazione Amiata", link: "https://maps.app.goo.gl/KLMjzbhY1412Ad3u8" }
+        ],
+        Cetona: [
+          { nome: "E.D. POGGIO CAPPELLO", link: "https://maps.app.goo.gl/tWzJZ8HtG3uZGDBf6" },
+          { nome: "F.P. FONTEVECCHIA", link: "https://maps.app.goo.gl/Yx1AsZpd7fMeCiAz5" },
+          { nome: "F.P. PATARNIONE", link: "https://maps.app.goo.gl/RDVdgQvUGNBY4TvW6" },
+          { nome: "F.P. PIAZZA L.CONTILE", link: "https://maps.app.goo.gl/xXsscXTvGxbAN9PEA" },
+          { nome: "F.P. VIA DEL TAMBURINO -PIAZZE", link: "https://maps.app.goo.gl/wdKaav6hpWTKXDU89" }
+        ],
+        ChiancianoTerme: [
+          { nome: "F.P. MEZZOMIGLIO", link: "https://maps.app.goo.gl/sKvXoFouzs1XLmVJ6" },
+          { nome: "F.P. VIA DELLA LIBERTA’", link: "https://maps.app.goo.gl/2CvZTrGf7zmdY2BJ7" },
+          { nome: "F.P. PORTA RIVELLINI", link: "https://maps.app.goo.gl/VRFC5kWTP2adzzrZ8" }
+        ],
+        Chiusi: [
+          { nome: "F.P. CHIUSI CITTA", link: "https://maps.app.goo.gl/6LVeDDnCHvWaF1Uz7" },
+          { nome: "F.P. MACCIANO", link: "https://maps.app.goo.gl/S2koFWQ2Bacvo4oz5" },
+          { nome: "F.P. CHIUSI SCALO", link: "https://maps.app.goo.gl/8ULW2cBKNxzAus25A" },
+          { nome: "F.P. MONTALLESE", link: "https://maps.app.goo.gl/vPZds7UvwKJ4LWnw8" },
+          { nome: "F.P. MONTEVENERE", link: "https://maps.app.goo.gl/up4Fk1aYKKrrR5k97" }
+        ],
+        Montepulciano: [
+          { nome: "F.P. ABBADIA DI MONTEPULCIANO (VIVO)", link: "https://maps.app.goo.gl/Sk1PrZUxtzWZpWPQ6" },
+          { nome: "F.P. ACQUAVIVA (VIVO)", link: "https://maps.app.goo.gl/q7Nd732LcehNDkTRA" },
+          { nome: "F.P. GRACCIANO (VIVO)", link: "https://maps.app.goo.gl/P7MvairbYupCDcxa8" },
+          { nome: "F.P. MONTEPULCIANO STAZIONE (VIVO)", link: "https://maps.app.goo.gl/gT4ZQGzmLRKX7MMb8" },
+          { nome: "F.P. ABBADIA DI MONTEPULCIANO (MONTEDOGLIO)", link: "https://maps.app.goo.gl/kHDhoRka94TDqXzC9" },
+          { nome: "F.P. ACQUAVIVA (MONTEDOGLIO)", link: "https://maps.app.goo.gl/8cWAojoPp9uEPPq58" },
+          { nome: "F.P. GRACCIANO (MONTEDOGLIO)", link: "https://maps.app.goo.gl/wpdck6q9sCBrnwta6" },
+          { nome: "F.P. MONTEPULCIANO STAZIONE (MONTEDOGLIO)", link: "https://maps.app.goo.gl/hjQhmgF2vnwkupB6A" },
+          { nome: "F.P. PONTE DI VALIANO (MONTEDOGLIO)", link: "https://maps.app.goo.gl/mGTBcgVmPD5nMCvr6" },
+          { nome: "F.P. TRE BERTE", link: "https://maps.app.goo.gl/Qevo8wXMgchinN3T6" },
+          { nome: "F.P. VALIANO", link: "https://maps.app.goo.gl/45wnJJ3MNbuqJ4ES8" },
+          { nome: "F.P. CERVOGNANO", link: "https://maps.app.goo.gl/gyaoRDXMPQnt5wnG6" },
+          { nome: "F.P. POGGIO FANTI", link: "https://maps.app.goo.gl/rBA6kGGKs8udL5a3A" },
+          { nome: "F.P. SAN BIAGIO", link: "https://maps.app.goo.gl/WTgj9XhQ3C4YpwRQ7" },
+          { nome: "F.P. VIA DELLE TERME S.ALBINO", link: "https://maps.app.goo.gl/TwLMQh7LKtFTSGGz6" }
+        ],
+        Piancastagnaio: [
+          { nome: "F.P. CAMPO FIERA", link: "https://maps.app.goo.gl/6nHGZ2V4HtjFC9c58" },
+          { nome: "F.P. PIAZZA MATTEOTTI", link: "https://maps.app.goo.gl/mPCZTEME8YCqv5Nx9" },
+          { nome: "F.P. S. MICHELE", link: "https://maps.app.goo.gl/XesidPivhpu23zVdA" },
+          { nome: "F.P. LA CASA DEL CORTO", link: "https://maps.app.goo.gl/JSEh3sjJf4vFAyHQ6" },
+          { nome: "F.P. TRE CASE", link: "https://maps.app.goo.gl/mJTTVp5oGmErePft5" },
+          { nome: "F.P. SARAGIOLO", link: "https://maps.app.goo.gl/a73kwg8W8GzYCqcY6" }
+        ],
+        Pienza: [
+          { nome: "F.P. MONTICCHIELLO", link: "https://maps.app.goo.gl/TM265dpPCgnh5YwM6" },
+          { nome: "F.P. PIENZA", link: "https://maps.app.goo.gl/3gjrjHhtPFVKHuD28" },
+          { nome: "F.P. SPEDALETTO", link: "https://maps.app.goo.gl/jmu6n2zFFwXS769B6" }
+        ],
+        Radicofani: [
+          { nome: "F.P. LE VIGNE", link: "https://maps.app.goo.gl/539nq2kENgfqorFj6" },
+          { nome: "F.P. CONTIGNANO", link: "https://maps.app.goo.gl/7MQCGJR8V82JgbkbA" },
+          { nome: "F.P. GHINO DI TACCO", link: "https://maps.app.goo.gl/CC4BNCFuCzmM3rJ79" }
+        ],
+        SanCascianodeiBagni: [
+          { nome: "E.D. LA CUPA -PALAZZONE", link: "https://maps.app.goo.gl/pXbni3cdntrdoAqP7" },
+          { nome: "F.P. PALAZZONE", link: "https://maps.app.goo.gl/RTcr1o8QJfy8cceFA" },
+          { nome: "F.P. PONTE A RIGO", link: "https://maps.app.goo.gl/xar753Sq3nurb6sd6" },
+          { nome: "F.P. CELLE SUL RIGO", link: "https://maps.app.goo.gl/D8LZCFxPsVPPFDyU8" },
+          { nome: "F.P. PIAZZA MATTEOTTI", link: "https://maps.app.goo.gl/mjM9cNAbpBJttmuZ6" },
+          { nome: "F.P. DELLA CHIESA", link: "https://maps.app.goo.gl/6yfxmsfinW46mpv38" }
+        ],
+        SanQuirico: [
+          { nome: "F.P. BAGNO VIGNONI", link: "https://maps.app.goo.gl/DwRUdjYkzf2BjneY7" },
+          { nome: "F.P. LA ROSA", link: "https://maps.app.goo.gl/KcwdnW3uRbcCFPqo8" }
+        ],
+        Sarteano: [
+          { nome: "E.D. S. MARIA", link: "https://maps.app.goo.gl/oTNN22UDvCW2GoyQA" },
+          { nome: "E.D. VIA PIO III", link: "https://maps.app.goo.gl/YfaSVkKdzosdyMgs8" },
+          { nome: "F.P. CASTIGLIONCELLO SUL TRINORO", link: "https://maps.app.goo.gl/8iELFQDd6nEvWA9u9" },
+          { nome: "F.P. FONTE VETRIANA", link: "https://maps.app.goo.gl/Lr5wF9HWpV5iB2wt6" },
+          { nome: "F.P. CASABEBI", link: "https://maps.app.goo.gl/fBJnXs1nL24XHkXH9" },
+          { nome: "F.P. FONTERENZA", link: "https://maps.app.goo.gl/PFfq4U9jGfSSN2Wu9" },
+          { nome: "F.P. PIAZZA I MAGGIO", link: "https://maps.app.goo.gl/mcWbjrj5WBhgeGVL6" },
+          { nome: "F.P. PORTA MONALDA", link: "https://maps.app.goo.gl/uNf8sKLbGW21hJcW7" }
+        ],
+        Sinalunga: [
+          { nome: "E.D. BETTOLLE -GIARDINI", link: "https://maps.app.goo.gl/ZEGAHezcFCV6tHwS8" },
+          { nome: "E.D. GUAZZINO", link: "https://maps.app.goo.gl/GHLAk8iwPRdb1ycT9" },
+          { nome: "F.P. GIARDINO CASSERO", link: "https://maps.app.goo.gl/YHQTkgbjvsiMAhz78" },
+          { nome: "F.P. I FRATI", link: "https://maps.app.goo.gl/w9NVW95c1bixXcki8" },
+          { nome: "F.P. P.ZZA DELLA REPUBBLICA", link: "https://maps.app.goo.gl/U7dmyrP6tYXdWPJq6" },
+          { nome: "F.P. FARNETELLA", link: "https://maps.app.goo.gl/kRDoofdFxr2VLGvM7" },
+          { nome: "F.P. PALAZZOLO RIGOMAGNO SCALO", link: "https://maps.app.goo.gl/vzoNryU9ybzNcAhH9" },
+          { nome: "F.P. PIAZZA GARIBALDI", link: "https://maps.app.goo.gl/boB2uTrWdrUCLpKz5" },
+          { nome: "F.P. RIGOMAGNO PAESE", link: "https://maps.app.goo.gl/Ux5mnrwJiVPA86ia6" },
+          { nome: "F.P. SCROFIANO", link: "https://maps.app.goo.gl/ztkC7G2uNSFgc71t9" }
+        ],
+        Torrita: [
+          { nome: "F.P. MONTEFOLLONICO", link: "https://maps.app.goo.gl/yY15RWhkHajzGuTC9" },
+          { nome: "F.P. VIA CESARE BATTISTI", link: "https://maps.app.goo.gl/NsK3W3FHSdBxsBuQ7" },
+          { nome: "F.P. VIA DI GROSSETO", link: "https://maps.app.goo.gl/haF1iPnDsW6zBGJCA" },
+          { nome: "F.P. VIA MAZZINI", link: "https://maps.app.goo.gl/2fDGpB2xmo6CL8Zr7" }
+        ],
+        Trequanda: [
+          { nome: "F.P. TREQUANDA", link: "https://maps.app.goo.gl/VsJjA5dqZo22Dbrm6" },
+          { nome: "F.P. CASTELMUZIO", link: "https://maps.app.goo.gl/xMEtwdgG3yPxBazEA" },
+          { nome: "F.P. PETROIO", link: "https://maps.app.goo.gl/AYXFmV7CEXXa5Rtt7" }
+        ]
+      };
+
+      const list = fontanelleDB[comune] || [];
+      const container = document.getElementById('fontanelleList');
+      let html = `<div class="titolo-comune">Fontanelle in ${comune.replace(/([A-Z])/g, ' $1').trim()}</div>`;
+
+      list.forEach(el => {
+        html += `<div class='fontanella'><a href="${el.link}" target="_blank">${el.nome}</a></div>`;
+      });
+      html += `<div style='text-align:center; margin-top:2rem;'><button class='button' onclick='showComuni()'>Torna ai comuni</button></div>`;
+
+      container.innerHTML = html;
+      document.getElementById('comuniPage').style.display = 'none';
+      container.style.display = 'block';
+    }
+  </script>
+</body>
+</html>
